@@ -1,0 +1,89 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="poke-button.html">
+<link rel="import" href="poke-label.html">
+<dom-module id="poke-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      :host(.container){
+        si yo (root)tengo una clase llamada container;
+        min-width: 160px;
+        min-height: 160px;
+      }
+
+      .container2{
+        busca dentro de mi.;
+        min-width: 160px;
+        min-height: 160px;
+        position: relative;
+        height: 160px;
+        width: 160px;
+      }
+      poke-label{
+        position: absolute;
+        bottom: 0;
+      }
+
+      .b1, .b2{
+                width: 50%;
+                position: absolute;
+                
+                height:100%;
+        }
+      .b2{
+        position: absolute;
+        left:50%;
+        background-color: green;
+
+      }
+      .b1{
+        position: absolute;
+        background-color: red;
+
+      }
+    </style>
+    <div class="container2">
+      
+      <div class="b1"></div>
+      <div class="b2"></div>
+
+      <poke-button pokemon="{{pokemon}}" ></poke-button> <!--on-click="_handlerClick"-->
+      <poke-label name="[[pokemon.name]]"></poke-label>
+    </div>
+    <template is="dom-if" if="{{pokemon.caputered}}">
+        <span>[[winBattles]]</span>
+    </template>
+  </template>
+  <script>
+    class PokeCard extends Polymer.Element {
+      static get properties() {
+        return {
+          pokemon: {
+            type: Object
+          },
+          winBattles:{
+            type: String,
+            computed: '_calculateWins(pokemon)'
+          }
+        }
+      }
+      static get is() {
+        return 'poke-card'
+      }
+
+      _handlerClick(event){
+        console.log(event.target, this.get('pokemon.name'));
+      }
+
+      _calculateWins(pokemon){
+        const winbattles = pokemon.batallas.filter((result)=> result === 'w');
+        return `${winbattles.length}/${pokemon.batallas.length}`;
+      }
+
+    }
+    customElements.define(PokeCard.is, PokeCard);
+  </script>
+</dom-module>

@@ -1,0 +1,118 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="poke-card.html">
+<dom-module id="poke-list">
+    <template>
+        <style>
+        :host{
+            display: block;
+        }
+        .card{
+            float: left;
+            margin-left: 15px;
+        }
+        </style>
+        <template is="dom-repeat" items="{{pokemons}}" filter="{{_filerPokemon2(filter)}}" observe="caputered">
+                <poke-card class="container card" pokemon='{{item}}' on-click="_capture"></poke-card>
+        </template>
+    </template>
+    <script>
+        class PockeLits extends Polymer.Element {
+            static get properties(){
+                return {
+                    filter:{
+                        type: String
+                   },
+                    pokemons:{
+                        type: Array,
+                        value: [
+                            {
+                                name: 'square',
+                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/1/13/007Squirtle_Pokemon_Mystery_Dungeon_Explorers_of_Sky.png/revision/latest?cb=20150105230449',
+                                type:'plant',
+                                batallas: ['w','d','l'],
+                                caputered: true
+                            },
+                            {
+                                name: 'eve',
+                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
+                                type:'fire',
+                                batallas: ['w','w','d','l'],
+                                caputered: false
+                            },
+                            {
+                                name: 'desconocido',
+                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
+                                type:'algo',
+                                batallas: ['w','w','d','l'],
+                                caputered: false
+                            }
+                        ]
+                    },
+                    selected:{
+                        type: Boolean,
+                        value: false
+                    }
+                }
+            }
+
+            static get is(){
+                return 'poke-list'
+            }
+            
+            ready(){
+                super.ready();
+                setTimeout(()=>{
+                   const pokemon = {
+                                    name: 'tres',
+                                    icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
+                                    type: 'plant',
+                                    batallas: ['w','w','w','d','l'],
+                                    caputered: false
+                            };
+                    this.push('pokemons', pokemon);
+                    this.pokemons[2].type='none';
+                },2000);
+            }
+
+            _capture(event){
+                /*const index = event.model.index;
+                const path = 'pokemons.'+ index + '.caputered';
+                console.log(path);
+                this.set(path,true);
+                console.log(event.model.item);*/
+                event.model.set('item.caputered',true);
+            }
+
+            _filerPokemon(item){
+               return !item.caputered;
+               
+            }
+
+            _filerPokemon2(filter){
+                if(!filter.palabra && !filter.onlywild){
+                    return null
+                }
+                return function(pokemon){
+                    if(filter.onlywild){
+                        return !pokemon.caputered && pokemon.name.indexOf(filter.palabra)>-1;
+                    }else{
+                        return pokemon.name.indexOf(filter.palabra)>-1;
+                    }
+                }
+            }
+
+            ordenaPokemon(itema, itemb){
+                console.log(itema.name+" -> "+ itemb.name);
+                let nameA = itema.name.toUpperCase(); 
+                let nameB = itemb.name.toUpperCase(); 
+                if(nameA === nameB){
+                    return 0;
+                 }
+                return  nameA > nameB ? 1: -1;
+
+            }
+        }
+        customElements.define(PockeLits.is, PockeLits);
+    </script>
+</dom-module>

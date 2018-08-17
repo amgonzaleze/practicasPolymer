@@ -1,0 +1,53 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="poke-search">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        </style>  
+            <input name="busqueda" placeholder="POKEMON" id="pokemon-name" on-input="_changeSearh"/>
+            <input type="checkbox" on-change="_changeSearhCheck"   > Only Wild<br>
+    </template>
+    <script>
+    class PokeSearch extends Polymer.Element{
+        static get is(){
+            return 'poke-search'
+        }
+        static get properties(){
+            return {
+                checked:{
+                    type: Boolean,
+                    valor: false
+                },
+                inputText:{
+                    type: String,
+                    value:''
+                }
+            }
+        }
+
+        _changeSearhCheck(event){
+            let checkbox = event.target;
+            this.checked = checkbox.checked;
+            this._sendEvent();
+
+        }
+
+        _sendEvent(){
+            this.dispatchEvent(new CustomEvent('search', {
+                detail: {
+                    palabra: this.inputText,
+                    onlywild: this.checked
+                }}
+            ));
+        }        
+
+        _changeSearh(event){
+            this.inputText = event.target.value;
+            this._sendEvent();
+        }
+    }
+    customElements.define(PokeSearch.is,PokeSearch);
+    </script>
+</dom-module>
