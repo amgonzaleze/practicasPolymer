@@ -11,43 +11,41 @@
             float: left;
             margin-left: 15px;
         }
+        h2{
+                font-size: 2rem;
+                background: none;
+            }
+        ::slotted(.title){
+            font-size: 3rem;
+            color: royalblue;
+        }
         </style>
+        
+        <slot name="title" class="title" >
+            <h2 >titulo por default de la lista</h2>
+        </slot>
+        <slot ><h2>titulo por default de la lista</h2></slot>
         <template is="dom-repeat" items="{{pokemons}}" filter="{{_filerPokemon2(filter)}}" observe="caputered">
-                <poke-card class="container card" pokemon='{{item}}' on-click="_capture"></poke-card>
+                <poke-card class="container card" pokemon='{{item}}' on-click="_capture" on-pokemons-changed="_onclickpokemon"></poke-card>
         </template>
+        
     </template>
     <script>
         class PockeLits extends Polymer.Element {
+            constructor(){
+                super();
+                //this.addEventListener('pokemons-changed',this._onclickpokemon);
+            }
             static get properties(){
+
                 return {
                     filter:{
                         type: String
                    },
                     pokemons:{
                         type: Array,
-                        value: [
-                            {
-                                name: 'square',
-                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/1/13/007Squirtle_Pokemon_Mystery_Dungeon_Explorers_of_Sky.png/revision/latest?cb=20150105230449',
-                                type:'plant',
-                                batallas: ['w','d','l'],
-                                caputered: true
-                            },
-                            {
-                                name: 'eve',
-                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
-                                type:'fire',
-                                batallas: ['w','w','d','l'],
-                                caputered: false
-                            },
-                            {
-                                name: 'desconocido',
-                                icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
-                                type:'algo',
-                                batallas: ['w','w','d','l'],
-                                caputered: false
-                            }
-                        ]
+                        value: [],
+                        notify: true
                     },
                     selected:{
                         type: Boolean,
@@ -62,7 +60,7 @@
             
             ready(){
                 super.ready();
-                setTimeout(()=>{
+               /* setTimeout(()=>{
                    const pokemon = {
                                     name: 'tres',
                                     icon: 'https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220',
@@ -72,9 +70,22 @@
                             };
                     this.push('pokemons', pokemon);
                     this.pokemons[2].type='none';
-                },2000);
+                },2000);*/
+
+            
             }
 
+            _onclickpokemon(event){
+                console.log(event);
+            }
+
+            
+
+            /*_loadPokemons(){
+                fetch('http://localhost:3000/pokemons').then((response)=> response.json()).then((response)=>{
+                    this.pokemons = response;
+                }).catch(console.error);
+            }*/
             _capture(event){
                 /*const index = event.model.index;
                 const path = 'pokemons.'+ index + '.caputered';

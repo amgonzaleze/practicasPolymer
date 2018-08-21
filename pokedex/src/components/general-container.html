@@ -1,0 +1,32 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="general-container">
+    <template>
+        <style>
+            :host{
+                display: block;
+                position: relative
+            }
+            .title{
+                text-align: center;
+                background-color: #6666;
+            }
+        </style>
+        <div class="title">
+            <slot name="title"></slot>
+        </div>
+
+        <slot></slot>
+    </template>
+    <script>
+    class GeneralContainer extends Polymer.Element{
+        static get is(){
+            return 'general-container'
+        }
+        static get properties(){
+            return {}
+        }
+
+    }
+    customElements.define(GeneralContainer.is,GeneralContainer);
+    </script>
+</dom-module>

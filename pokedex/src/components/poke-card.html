@@ -62,7 +62,8 @@
       static get properties() {
         return {
           pokemon: {
-            type: Object
+            type: Object,
+            notify: true
           },
           winBattles:{
             type: String,
@@ -82,6 +83,8 @@
         const winbattles = pokemon.batallas.filter((result)=> result === 'w');
         return `${winbattles.length}/${pokemon.batallas.length}`;
       }
+
+      
 
     }
     customElements.define(PokeCard.is, PokeCard);

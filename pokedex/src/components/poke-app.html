@@ -1,8 +1,9 @@
 <link rel="import" href="/bower_components/polymer/polymer-element.html">
 <link rel="import" href="/bower_components/polymer/lib/elements/dom-repeat.html">
-<link rel="import" href="poke-list.html">
 <link rel="import" href="/bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="poke-search.html">
+<link rel="import" href="general-container.html">
+<link rel="import" href="poke-region.html">
 
 <dom-module id="poke-app">
     <template>
@@ -13,7 +14,6 @@
             .list{
                 width: 100%;
                 height: 100%;
-                background: blue;
                 position: relative;
             }
             .loader{
@@ -31,14 +31,22 @@
             .header{
                 margin-bottom: 12px;
             }
+            
         </style>
-        <div class="header">
-            <span>Escribe el nombre de un pokemon</span>
-            <poke-search on-search="_newSearch"></poke-search>
-        </div>
-        <div class="list">
-            <poke-list filter="[[search]]"></poke-list>
-        </div>
+
+        <general-container>
+
+            <div class="header" slot="title">
+                <span>Escribe el nombre de un pokemon</span>
+                <poke-search on-search="_newSearch"></poke-search>
+            </div>
+
+            <div class="list" >
+                <poke-region filter="[[search]]" 
+                base-url="http://localhost:3000" 
+                region="paleta"></poke-region>
+            </div>
+        </general-container>
         
         <template is="dom-if" if="{{loading}}">
                 <div class="loader">

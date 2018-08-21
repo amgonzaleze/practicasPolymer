@@ -1,0 +1,40 @@
+{
+    "kanto": [
+            {
+                "id":"1",
+                "name": "square",
+                "icon": "https://vignette.wikia.nocookie.net/pokemon/images/1/13/007Squirtle_Pokemon_Mystery_Dungeon_Explorers_of_Sky.png/revision/latest?cb=20150105230449",
+                "type":"plant",
+                "batallas": ["w","d","l"],
+                "caputered": true
+            },
+            {
+                "id":"2",
+                "name": "eve",
+                "icon": "https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220",
+                "type":"fire",
+                "batallas": ["w","w","d","l"],
+                "caputered": false
+            }
+        ],
+        "paleta": [
+            {
+                "id":"1",
+                "name": "paleta1",
+                "icon": "https://vignette.wikia.nocookie.net/pokemon/images/1/13/007Squirtle_Pokemon_Mystery_Dungeon_Explorers_of_Sky.png/revision/latest?cb=20150105230449",
+                "type":"plant",
+                "batallas": ["w","d","l"],
+                "caputered": true
+            },
+            {
+                "id":"2",
+                "name": "paleta2",
+                "icon": "https://vignette.wikia.nocookie.net/pokemon/images/2/26/133Eevee_Pokemon_Mystery_Dungeon_Red_and_Blue_Rescue_Teams.png/revision/latest?cb=20150106012220",
+                "type":"fire",
+                "batallas": ["w","w","d","l"],
+                "caputered": false
+            }
+        ]
+    
+
+}
