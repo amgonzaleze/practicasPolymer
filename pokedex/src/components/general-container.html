@@ -9,13 +9,22 @@
             .title{
                 text-align: center;
                 background-color: #6666;
+                padding: 3rem;
+            }
+            .detail{
+                box-sizing: border-box;
+                text-align: center;
+                background-color: #666611;
+                padding: 3rem;
+                display: flex;
             }
         </style>
         <div class="title">
             <slot name="title"></slot>
         </div>
-
+        <div class="detail">
         <slot></slot>
+        </div>
     </template>
     <script>
     class GeneralContainer extends Polymer.Element{
