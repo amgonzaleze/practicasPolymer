@@ -1,0 +1,126 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-card/paper-card.html">
+<link rel="import" href="/bower_components/simple-button/simple-button.html">
+<link rel="import" href="/bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/iron-form/iron-form.html">
+<dom-module id="poke-form">
+    <template>
+        <style>
+            :host {
+                display: block;
+                position: relative;
+                text-align: center;
+
+            --paper-card:{
+                               min-width: 400px;;
+                }
+                --paper-card-header-image:{
+                    width:100px;
+                }
+                --paper-card-header:{
+                    padding: 0px;
+                }
+                --paper-card-header-image-text:{
+                    position: relative;
+                }
+            }
+            
+
+            .card-actions {
+                padding: 12px;
+            }
+            
+        </style>
+
+        <paper-card heading=" Pokemon" image="https://cdn4.iconfinder.com/data/icons/sales-reports/512/fill_form-128.png">
+            <div class="card-content">
+                <div class="cafe-header">Formulario para pokemons</div>
+
+                <iron-form id="form" >
+                    <form  >
+
+                        <paper-input name="id" id="inputid" label="Id pokemon!" type="number"></paper-input>
+                        <paper-input name="nombre" id="inputname" char-counter label="Nombre pokemon!" type="text"></paper-input>
+
+                        <paper-input required 
+                            id="inputimage"
+                            error-message="Invalid input!" 
+                            name="icon" 
+                            char-counter 
+                            label="Imagen" 
+                            type="url"
+                            >
+                            <iron-icon icon="search" slot="prefix"></iron-icon>
+                        </paper-input>
+
+                        <paper-dropdown-menu label="Tipo:" name="type" id="types">
+                            <paper-listbox slot="dropdown-content" selected="1">
+                              <paper-item>plant</paper-item>
+                              <paper-item>fire</paper-item>
+                            </paper-listbox>
+                          </paper-dropdown-menu>
+
+                          <paper-dropdown-menu label="Region" name="region" id="region">
+                            <paper-listbox slot="dropdown-content" selected="1">
+                              <paper-item>kanto</paper-item>
+                              <paper-item>paleta</paper-item>
+                            </paper-listbox>
+                          </paper-dropdown-menu>
+
+
+                    </form>
+                </iron-form>
+                <div class="card-actions">
+                    <div class="horizontal justified">
+                        <!-- Easy to style -->
+                        <paper-button class="pink" >Limpiar</paper-button>
+                        <paper-button raised class="indigo" on-click="_submitForm">Enviar</paper-button>
+                    </div>
+                </div>
+
+            </div>
+        </paper-card>
+    </template>
+    <script>
+        class PokeForm extends Polymer.Element {
+            static get is() {
+                return 'poke-form';
+            }
+            static get properties() {
+                return {
+
+                }
+            }
+            _validateForm(){
+                if (this.$.inputid.value ==="" ||
+                     this.$.inputname.value ==="" ||
+                    this.$.inputimage.value ==="" ||
+                    !this.$.inputimage.value.startsWith('http')
+                    ){
+                        alert("Datos invalidos")
+                        return false;
+                    }
+                    return true;
+                    
+            }
+            _submitForm(event) {
+                event.stopPropagation();
+                if(!this._validateForm()){
+                    return;
+                }
+                alert("algo");
+                const formData = this.$.form.serializeForm();
+                formData.batallas = [];
+                formData.caputered = false;
+                console.log(formData);
+                this.$.form.submit();
+            }
+        }
+        customElements.define(PokeForm.is, PokeForm);
+    </script>
+</dom-module>

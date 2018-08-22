@@ -4,7 +4,8 @@
         <style>
             :host{
                 display: block;
-                position: relative
+                position: relative;
+                padding: 0 2rem;
             }
             .title{
                 text-align: center;
@@ -14,13 +15,13 @@
             .detail{
                 box-sizing: border-box;
                 text-align: center;
-                background-color: #666611;
+                background-color: #1212;
                 padding: 3rem;
                 display: flex;
             }
         </style>
         <div class="title">
-            <slot name="title"></slot>
+            <slot name="title">you must</slot>
         </div>
         <div class="detail">
         <slot></slot>

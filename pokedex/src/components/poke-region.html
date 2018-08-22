@@ -6,7 +6,7 @@
         <style>
         </style>
     
-        <poke-list filter="[[filter]]" pokemons="{{pokemosRegion}}">
+        <poke-list on-capture="_capture" filter="[[filter]]" pokemons="{{pokemosRegion}}">
                 <h2 slot="title" class="title">Lista de pokemonos</h1>
                 <h4>Subtitulo</h4>
         </poke-list>
@@ -56,7 +56,6 @@
 
          /*iron-ajax response*/
          _loadAjaxPokemons(event){
-            console.error("sigue");
                 this.pokemosRegion = event.detail.response;
                 //solo en readonly this._setPokemons(event.detail.response);
         }
@@ -64,7 +63,14 @@
         /*iron-ajax error*/
         _handleError(event){
                 console.error(event.detail)
-            }
+        }
+
+        _capture(event){
+            console.log(event.detail.model)
+            event.detail.model.set('item.caputered',true);
+            //const path = 'pokemosRegion.'+ event.detail.model.index + '.caputered';
+            //this.set(path,true);
+        }
     }
     customElements.define(PokeRegion.is, PokeRegion);
     </script>

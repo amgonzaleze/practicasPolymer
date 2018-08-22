@@ -26,7 +26,9 @@
         </slot>
         <slot ><h2>titulo por default de la lista</h2></slot>
         <template is="dom-repeat" items="{{pokemons}}" filter="{{_filerPokemon2(filter)}}" observe="caputered">
+            <!--general-container-->  
                 <poke-card class="container card" pokemon='{{item}}' on-click="_capture" on-pokemons-changed="_onclickpokemon"></poke-card>
+            <!--/general-container-->  
         </template>
         
     </template>
@@ -92,7 +94,12 @@
                 console.log(path);
                 this.set(path,true);
                 console.log(event.model.item);*/
-                event.model.set('item.caputered',true);
+                this.dispatchEvent(new CustomEvent('capture',{
+                    detail:{
+                        model: event.model
+                    }
+                }));
+                //event.model.set('item.caputered',true);
             }
 
             _filerPokemon(item){
@@ -106,9 +113,9 @@
                 }
                 return function(pokemon){
                     if(filter.onlywild){
-                        return !pokemon.caputered && pokemon.name.indexOf(filter.palabra)>-1;
+                        return !pokemon.caputered && pokemon.name.toUpperCase().indexOf(filter.palabra.toUpperCase())>-1;
                     }else{
-                        return pokemon.name.indexOf(filter.palabra)>-1;
+                        return pokemon.name.toUpperCase().indexOf(filter.palabra.toUpperCase())>-1;
                     }
                 }
             }
