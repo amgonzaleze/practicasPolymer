@@ -1,0 +1,62 @@
+{
+  "kanto": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "type": "plant",
+      "icon": "http://pixelartmaker.com/art/3f100623ee8b17c.png",
+      "battles": [],
+      "captured": false
+    },
+    {
+      "id": 2,
+      "name": "Ivysaur",
+      "icon": "https://vignette.wikia.nocookie.net/la-wiki-pokeland/images/8/86/Ivysaur.png/revision/latest?cb=20130905051527&path-prefix=es",
+      "type": "poison",
+      "battles": [],
+      "captured": false
+    },
+    {
+      "id": "3",
+      "name": "fds",
+      "icon": "https://vignette.wikia.nocookie.net/es.pokemon/images/5/56/Charmander.png/revision/latest?cb=20140207202456",
+      "type": "poison",
+      "battles": [],
+      "captures": false
+    },
+    {
+      "id": "44",
+      "name": "bb",
+      "icon": "https://vignette.wikia.nocookie.net/es.pokemon/images/5/56/Charmander.png/revision/latest?cb=20140207202456",
+      "type": "poison",
+      "battles": [],
+      "captures": false
+    },
+    {
+      "id": "5",
+      "name": "bbb22",
+      "icon": "https://vignette.wikia.nocookie.net/es.pokemon/images/5/56/Charmander.png/revision/latest?cb=20140207202456",
+      "type": "poison",
+      "battles": [],
+      "captures": false
+    }
+  ],
+  "kalos": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "type": "plant",
+      "icon": "http://pixelartmaker.com/art/3f100623ee8b17c.png",
+      "battles": [],
+      "captured": false
+    },
+    {
+      "id": 2,
+      "name": "Ivysaur",
+      "icon": "https://vignette.wikia.nocookie.net/la-wiki-pokeland/images/8/86/Ivysaur.png/revision/latest?cb=20130905051527&path-prefix=es",
+      "type": "poison",
+      "battles": [],
+      "captured": false
+    }
+  ]
+}

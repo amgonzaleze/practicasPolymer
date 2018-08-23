@@ -1,0 +1,47 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="poke-dex-page.html">
+<link rel="import" href="poke-form-page.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="region-kanto.html">
+<link rel="import" href="dummy-page.html">
+<dom-module id="poke-app">
+  <template>
+    <style>
+      .nav{
+        padding-bottom: 2rem;
+      }
+    </style>
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/" active="{{homeActive}}"></app-route>
+    <app-route route="{{route}}" pattern="/poke-new" active="{{newActive}}"></app-route>
+    <app-route route="{{route}}" pattern="/kanto" active="{{newKalo}}"></app-route>
+    <app-route route="{{route}}" pattern="/dummy" active="{{newDummy}}"></app-route>
+    <main>
+      <nav class="nav">
+        <a href="/"><paper-button raised>Home</paper-button></a>
+        <a href="/poke-new"><paper-button raised>New Pokemon</paper-button></a>
+        <a href="/kanto"><paper-button raised>Only Kanto</paper-button></a>
+        <a href="/dummy"><paper-button raised>Dummy</paper-button></a>
+      </nav>
+      <poke-dex-page active={{homeActive}}></poke-dex-page>
+      <poke-form-page active="{{newActive}}"></poke-form-page>
+      <region-kanto active={{newKalo}}></region-kanto>
+      <dummy-page active={{newDummy}}></dummy-page>
+    </main>
+  </template>
+  <script>
+    class PokeApp extends Polymer.Element {
+      static get is () {
+        return 'poke-app'
+      }
+      ready () {
+        super.ready()
+        console.log(this.route)
+      }
+    }
+    customElements.define(PokeApp.is, PokeApp)
+  </script>
+</dom-module>

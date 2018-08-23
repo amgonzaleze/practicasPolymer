@@ -1,0 +1,47 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="stylesheet" href="poke-ajax.html">
+<dom-module id="dummy-component">
+    <template>
+        <style>
+            :host{
+                display: block;
+                position: relative;
+            }
+            .dummy-result{
+                width: 100%;
+                display: block;
+            }
+        </style>
+        <span>En este ejemplo observa un componente sin 
+            interfaz y su resultado es
+            reflejado en un text area de html
+        </span><br/>
+        <textarea class="dummy-result" disabled="true" id="textarea">
+
+        </textarea>
+
+        <poke-ajax auto handle-as="json" url="http://localhost:3000/kanto" on-response="_succes" on-error="_error"></poke-ajax>
+    </template>
+    <script>
+        class Dummy extends Polymer.Element {
+            static get is() {
+                return 'dummy-component'
+            }
+
+            static get properties() {
+                return {}
+            }
+
+            _succes(event) {
+                console.log(event);
+                this.$.textarea.innerText = JSON.stringify(event.detail);
+            }
+
+            _error(event) {
+                console.log(event);
+                this.$.textarea.innerText = "sucedio un error \n"+ event.detail.message;
+            }
+        }
+        customElements.define(Dummy.is, Dummy);
+    </script>
+</dom-module>

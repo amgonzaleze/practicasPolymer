@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="poke-dex-kanto.html">
+<dom-module id="region-kanto">
+    <template>
+        <style>
+            :host {
+                display: none;
+            }
+            :host([active]) {
+                display: block;
+            }
+        </style>
+
+        <poke-dex-kanto></poke-dex-kanto>
+    </template>
+    <script>
+        class RegionKanto extends Polymer.Element{
+            static get is(){
+                return 'region-kanto'
+            }
+            static get properties(){
+                return {
+                    active: {
+                        type: Boolean,
+                        value: false,
+                        reflectToAttribute: true
+                    }
+                }
+            }
+        }
+    customElements.define(RegionKanto.is,RegionKanto);
+    </script>
+</dom-module>
