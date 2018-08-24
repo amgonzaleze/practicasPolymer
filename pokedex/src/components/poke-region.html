@@ -4,11 +4,15 @@
 <dom-module id="poke-region">
     <template>
         <style>
+            :host{
+                display: block;
+                position: relative;
+            }
         </style>
     
         <poke-list on-capture="_capture" filter="[[filter]]" pokemons="{{pokemosRegion}}">
-                <h2 slot="title" class="title">Lista de pokemonos</h1>
-                <h4>Subtitulo</h4>
+                <h2 slot="title" class="title">Lista de pokemonos de </h1>
+                <h4>[[region]]</h4>
         </poke-list>
 
         <iron-ajax

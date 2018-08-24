@@ -16,61 +16,54 @@
                 position: relative;
                 text-align: center;
 
-            --paper-card:{
-                               min-width: 400px;;
+                --paper-card: {
+                    min-width: 400px;
+                    ;
                 }
-                --paper-card-header-image:{
-                    width:100px;
+                --paper-card-header-image: {
+                    width: 100px;
                 }
-                --paper-card-header:{
+                --paper-card-header: {
                     padding: 0px;
                 }
-                --paper-card-header-image-text:{
+                --paper-card-header-image-text: {
                     position: relative;
                 }
             }
-            
+
 
             .card-actions {
                 padding: 12px;
             }
-            
         </style>
 
         <paper-card heading=" Pokemon" image="https://cdn4.iconfinder.com/data/icons/sales-reports/512/fill_form-128.png">
             <div class="card-content">
                 <div class="cafe-header">Formulario para pokemons</div>
 
-                <iron-form id="form" >
-                    <form  >
+                <iron-form id="form">
+                    <form>
 
                         <paper-input name="id" id="inputid" label="Id pokemon!" type="number"></paper-input>
-                        <paper-input name="nombre" id="inputname" char-counter label="Nombre pokemon!" type="text"></paper-input>
+                        <paper-input name="name" id="inputname" char-counter label="Nombre pokemon!" type="text"></paper-input>
 
-                        <paper-input required 
-                            id="inputimage"
-                            error-message="Invalid input!" 
-                            name="icon" 
-                            char-counter 
-                            label="Imagen" 
-                            type="url"
-                            >
+                        <paper-input required id="inputimage" error-message="Invalid input!" name="icon" char-counter label="Imagen" type="url">
                             <iron-icon icon="search" slot="prefix"></iron-icon>
                         </paper-input>
 
                         <paper-dropdown-menu label="Tipo:" name="type" id="types">
                             <paper-listbox slot="dropdown-content" selected="1">
-                              <paper-item>plant</paper-item>
-                              <paper-item>fire</paper-item>
+                                <paper-item>plant</paper-item>
+                                <paper-item>fire</paper-item>
                             </paper-listbox>
-                          </paper-dropdown-menu>
+                        </paper-dropdown-menu>
 
-                          <paper-dropdown-menu label="Region" name="region" id="region">
+                        <paper-dropdown-menu label="Region" name="region" id="region">
                             <paper-listbox slot="dropdown-content" selected="1">
-                              <paper-item>kanto</paper-item>
-                              <paper-item>paleta</paper-item>
+                                <paper-item>kanto</paper-item>
+                                <paper-item>paleta</paper-item>
                             </paper-listbox>
-                          </paper-dropdown-menu>
+                        </paper-dropdown-menu>
 
 
                     </form>
@@ -78,7 +71,7 @@
                 <div class="card-actions">
                     <div class="horizontal justified">
                         <!-- Easy to style -->
-                        <paper-button class="pink" >Limpiar</paper-button>
+                        <paper-button class="pink" on-click="_reset">Limpiar</paper-button>
                         <paper-button raised class="indigo" on-click="_submitForm">Enviar</paper-button>
                     </div>
                 </div>
@@ -96,29 +89,51 @@
 
                 }
             }
-            _validateForm(){
-                if (this.$.inputid.value ==="" ||
-                     this.$.inputname.value ==="" ||
-                    this.$.inputimage.value ==="" ||
+            _validateForm() {
+                if (this.$.inputid.value === "" ||
+                    this.$.inputname.value === "" ||
+                    this.$.inputimage.value === "" ||
                     !this.$.inputimage.value.startsWith('http')
-                    ){
-                        alert("Datos invalidos")
-                        return false;
-                    }
-                    return true;
-                    
+                ) {
+                    alert("Datos invalidos")
+                    return false;
+                }
+                return true;
+
+            }
+            _reset(event){
+                event.stopPropagation();
+                this.$.form.reset();
+
+                console.log("limpia");
             }
             _submitForm(event) {
                 event.stopPropagation();
-                if(!this._validateForm()){
+                if (!this._validateForm()) {
                     return;
                 }
-                alert("algo");
                 const formData = this.$.form.serializeForm();
                 formData.batallas = [];
                 formData.caputered = false;
+                const region = formData.region;
+                delete formData.region;
                 console.log(formData);
-                this.$.form.submit();
+                //this.$.form.submit();
+                const url = 'http://localhost:3000/' + region;
+                const config = {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                }
+                fetch(url, config)
+                    .then(response => {
+                        console.log(response)
+                        this.$.form.reset();
+                    })
+                    .catch(error => console.log(error))
+
             }
         }
         customElements.define(PokeForm.is, PokeForm);

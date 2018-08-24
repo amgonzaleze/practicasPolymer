@@ -1,0 +1,93 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="general-container.html">
+
+<dom-module id="poke-dex-page">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+
+      :host([active]) {
+        display: block;
+      }
+      .list{
+        display: block;
+                width: 100%;
+               
+                
+            }
+            .loader{
+                width: 100%;
+                height: 100%;
+                background: white;
+                position: absolute;
+                text-align: center;
+                display: block;
+                position: absolute;
+                top:0;
+            }
+            .img{
+                position: relative;
+                top: 50%;
+                
+            }
+            .header{
+                margin-bottom: 12px;
+            }
+    </style>
+    <general-container>
+
+      <div class="header" slot="title">
+        <span>Escribe el nombre de un pokemon</span>
+        <poke-search on-search="_newSearch"></poke-search>
+      </div>
+
+      <div class="list">
+        <poke-region filter="[[search]]" base-url="http://localhost:3000" region="[[region]]"></poke-region>
+      </div>
+      
+    </general-container>
+  </template>
+  <script>
+    class PokeDexPage extends Polymer.Element {
+      static get properties() {
+        return {
+          active: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+          },
+          loading: {
+              type: Boolean,
+              value: true,
+              notify: true
+          },
+          search:{
+              type: Object,
+              notify: true
+          },
+          region:{
+            type: String,
+            notify: true
+          }
+          
+        }
+      }
+      static get is() {
+        return 'poke-dex-page'
+      }
+
+      _newSearch(event){
+            event.stopPropagation();
+            console.log(event.detail);
+            this.set('search',event.detail);
+        }
+
+        _getfalse(){
+            return false;
+        }
+    }
+    customElements.define(PokeDexPage.is, PokeDexPage)
+  </script>
+</dom-module>

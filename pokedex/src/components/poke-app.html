@@ -4,7 +4,11 @@
 <link rel="import" href="poke-search.html">
 <link rel="import" href="general-container.html">
 <link rel="import" href="poke-region.html">
-
+<link rel="import" href="/bower_components/app-route/app-location.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+<link rel="import" href="poke-dex-page.html">
+<link rel="import" href="poke-form-page.html">
+<link rel="import" href="dummy-page.html">
 <dom-module id="poke-app">
     <template>
         <style>
@@ -34,10 +38,19 @@
             .header{
                 margin-bottom: 12px;
             }
+            .nav{
+                margin-bottom: 40px;
+                background-color: antiquewhite;
+                padding: 12px;
+            }
+            .activo{
+                background: white;
+                color: blue;
+            }
             
         </style>
 
-        <general-container>
+        <!--general-container>
 
             <div class="header" slot="title">
                 <span>Escribe el nombre de un pokemon</span>
@@ -49,7 +62,25 @@
                 base-url="http://localhost:3000" 
                 region="paleta"></poke-region>
             </div>
-        </general-container>
+        </general-container-->
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/" active="{{homeActive}}"></app-route>
+        <app-route route="{{route}}" pattern="/poke-new" active="{{newActive}}"></app-route>
+        <app-route route="{{route}}" pattern="/kanto" active="{{newKalo}}"></app-route>
+        <app-route route="{{route}}" pattern="/dummy" active="{{newDummy}}"></app-route>
+        <main>
+        <nav class="nav">
+            <a href="/"><paper-button raised class$="{{_setClassActive(homeActive)}}">Home</paper-button></a>
+            <a href="/poke-new"><paper-button raised class$="{{_setClassActive(newActive)}}">New Pokemon</paper-button></a>
+            <a href="/kanto"><paper-button raised  class$="{{_setClassActive(newKalo)}}">Only Kanto</paper-button></a>
+            <a href="/dummy"><paper-button raised  class$="{{_setClassActive(newDummy)}}">Dummy</paper-button></a>
+        </nav>
+        <poke-dex-page  active={{homeActive}} region="paleta"></poke-dex-page>
+        <poke-form-page  active="{{newActive}}"></poke-form-page>
+        <poke-dex-page active={{newKalo}} region="kanto"></poke-dex-page>
+        <dummy-page active={{newDummy}}></dummy-page>
+        </main>
+
         
         <template is="dom-if" if="{{loading}}">
                 <div class="loader">
@@ -83,12 +114,11 @@
             setTimeout(() => {
                 this.loading = false;
             }, 2000);
+            console.log(this.route)
         }
 
-        _newSearch(event){
-            event.stopPropagation();
-            console.log(event.detail);
-            this.set('search',event.detail);
+        _setClassActive(active){
+            return active ? "activo":"";
         }
     }
     customElements.define(PokeApp.is, PokeApp);
