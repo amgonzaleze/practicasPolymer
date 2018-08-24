@@ -4,10 +4,19 @@
 		<style>
 			:host{
 				display: block;
+				background: #11111117;
+				text-align: center;
+    			
 			}
+			.input{
+				position: relative;
+				margin: 0 auto;
+				display: block;
+			}
+
 		</style>
-		<h1>addElente</h1>
-		<input id="nombretarea" type="text" name="tarea"/>
+		<h1>Escribe tu tarea a guardar</h1>
+		<input class="input" id="nombretarea" type="text" name="tarea"/>
 		<button on-click="_sendbtn">guardar</button>
 	</template>
 

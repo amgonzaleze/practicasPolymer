@@ -4,14 +4,22 @@
 		<style>
 			:host{
 				display: block;
+			    background: #b8d494;
+			    text-align: center;
+			}
+			.caja{
+				    display: block;
+				    margin-bottom: auto;
+				    border-bottom: solid 2px #ff3333;
+				    margin: 0 auto;
 			}
 		</style>
-		<h1>Lista</h1>
+		<h1>Las tareas ya Guardadas son</h1>
 		
 		
 		<template is="dom-repeat"  items="{{tareas}}" filter="{{_myfilter(filter)}}" >
 		
-				<div>
+				<div class="caja">
 					<input disabled$="{{item.disable}}" id="chekelement" type="checkbox"
 					on-change="_check">
 					<span>{{item.name}}</span>
