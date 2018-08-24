@@ -1,0 +1,69 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="lista-element">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		<h1>Lista</h1>
+		
+		
+		<template is="dom-repeat"  items="{{tareas}}" filter="{{_myfilter(filter)}}" >
+		
+				<div>
+					<input disabled$="{{item.disable}}" id="chekelement" type="checkbox"
+					on-change="_check">
+					<span>{{item.name}}</span>
+				<div>
+
+		</template>
+	</template>
+
+	<script>
+		class ListaElement extends Polymer.Element{
+			static get is(){
+				return 'lista-element'
+			}
+
+			static get properties(){
+				return {
+					tareas:{
+						type: Object
+					},
+					filter:{
+						type: String,
+						value: '',
+						notify: true
+					},
+
+				}
+			}
+
+			_myfilter(filtro){
+				console.log("filtro");
+				console.log(filtro);
+				return function(item){
+					console.log(item);
+					return item.name.toLocaleUpperCase().indexOf(filtro.toLocaleUpperCase())>-1;
+				}
+				
+			}
+
+			_check(item){
+				console.log(item.model.index+'');
+				this.set('tareas.'+item.model.index+'.disable', true);
+				this.notifyPath('tareas.'+item.model.index+'.disable')
+				console.log('tareas.'+item.model.index+'.disable');
+			}
+
+			ready(){
+				super.ready()
+				console.log("filter");
+				console.log(this.tareas);
+			}
+
+		}
+		customElements.define(ListaElement.is, ListaElement);
+	</script>
+</dom-module>

@@ -1,0 +1,32 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="filter-list">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		<h1>todolist filter</h1>
+		<input type="text" name="tarea" on-input="_cambioPalabra"/>
+	</template>
+
+	<script>
+		class FilterList extends Polymer.Element{
+			static get is(){
+				return 'filter-list'
+			}
+
+			static get properties(){
+				return {}
+			}
+
+			_cambioPalabra(event){
+				this.dispatchEvent(new CustomEvent('changefilter',{detail: {
+					name: event.target.value
+				}}))
+			}
+
+		}
+		customElements.define(FilterList.is, FilterList);
+	</script>
+</dom-module>

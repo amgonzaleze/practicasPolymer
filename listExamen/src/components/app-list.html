@@ -1,0 +1,76 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="filter-list.html">
+<link rel="import" href="lista-element.html">
+<link rel="import"  href="add-element.html">
+<dom-module id="app-list">
+	<template>
+		<style>
+			
+			:host{
+				display: block;
+			}
+		</style>
+		<span>todolist</span>
+		<add-element on-send="_new"></add-element>
+		<filter-list on-changefilter="_cachFilter"></filter-list>
+		<lista-element tareas="{{tareas}}" filter="{{filter}}"></lista-element>
+	</template>
+
+	<script>
+		class AppList extends Polymer.Element{
+			static get is(){
+				return 'app-list'
+			}
+
+			static get properties(){
+				return {
+					filter:{
+						type: String,
+						value: '',
+						notify: true
+					},
+					tareas:{
+						type: Array,
+						notify: true,
+						value: function(){
+							return [
+								{
+									name: 'una',
+									disable:false
+								},
+								{
+									name: 'dos',
+									disable:false
+								},
+								{
+									name: 'tres',
+									disable:false
+								}
+							]
+						}
+					}
+				}
+			}
+
+			_cachFilter(event){
+				console.log("app");
+				this.set('filter',event.detail.name );
+				console.log(event.detail.name);
+			}
+
+			ready(){
+				super.ready()
+				//console.log(this.tareas);
+			}
+
+			_new(event){
+				console.log("nuevo");
+				console.log("nuevo");
+				this.push('tareas',{ name: event.detail.name, disable: false});
+				console.log(event.detail);
+			}
+
+		}
+		customElements.define(AppList.is, AppList);
+	</script>
+</dom-module>

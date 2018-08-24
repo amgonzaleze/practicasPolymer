@@ -1,0 +1,39 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<dom-module id="add-element">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+		<h1>addElente</h1>
+		<input id="nombretarea" type="text" name="tarea"/>
+		<button on-click="_sendbtn">guardar</button>
+	</template>
+
+	<script>
+		class AddElement extends Polymer.Element{
+			static get is(){
+				return 'add-element'
+			}
+
+			static get properties(){
+				return {}
+			}
+
+			_sendbtn(event){
+				console.log("btn"+ this.$.nombretarea.value)
+				this.dispatchEvent(new CustomEvent('send',{detail: {
+					name: this.$.nombretarea.value
+				}}))
+			}
+
+			ready(){
+				super.ready()
+				console.log("SOY APP ELEMENT");
+			}
+
+		}
+		customElements.define(AddElement.is, AddElement);
+	</script>
+</dom-module>

@@ -1,0 +1,18 @@
+{
+  "name": "listExamen",
+  "homepage": "https://github.com/amgonzaleze/practicasPolymer",
+  "authors": [
+    "alan michael Gonzalez Echavarria <alanmichael.gonzalez.contractor@bbva.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
