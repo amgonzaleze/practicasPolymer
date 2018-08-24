@@ -13,6 +13,9 @@
 				margin: 0 auto;
 				display: block;
 			}
+			h1{
+				    font-size: 1.3rem;
+			}
 
 		</style>
 		<h1>Escribe tu tarea a guardar</h1>
@@ -35,6 +38,7 @@
 				this.dispatchEvent(new CustomEvent('send',{detail: {
 					name: this.$.nombretarea.value
 				}}))
+				this.$.nombretarea.value  ='';
 			}
 
 			ready(){

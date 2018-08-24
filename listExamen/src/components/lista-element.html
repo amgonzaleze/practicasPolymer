@@ -8,10 +8,16 @@
 			    text-align: center;
 			}
 			.caja{
-				    display: block;
-				    margin-bottom: auto;
-				    border-bottom: solid 2px #ff3333;
-				    margin: 0 auto;
+				       display: block;
+    margin-bottom: auto;
+    border: solid 2px #5d4a4a78;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 22px;
+    border-radius: 12px;
+			}
+			h1{
+				    font-size: 1.3rem;
 			}
 		</style>
 		<h1>Las tareas ya Guardadas son</h1>
@@ -44,6 +50,10 @@
 						value: '',
 						notify: true
 					},
+					empty:{
+						type: Boolean,
+						value: true
+					}
 
 				}
 			}
@@ -70,6 +80,10 @@
 				console.log("filter");
 				console.log(this.tareas);
 			}
+
+		
+
+			
 
 		}
 		customElements.define(ListaElement.is, ListaElement);

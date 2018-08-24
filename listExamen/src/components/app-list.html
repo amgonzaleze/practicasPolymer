@@ -10,7 +10,7 @@
 				display: block;
 			}
 		</style>
-		<span>todolist</span>
+		<h3>Esta es mi app de lista de tareas</h3>
 		<add-element on-send="_new"></add-element>
 		<filter-list on-changefilter="_cachFilter"></filter-list>
 		<lista-element tareas="{{tareas}}" filter="{{filter}}"></lista-element>
@@ -34,10 +34,7 @@
 						notify: true,
 						value: function(){
 							return [
-								{
-									name: 'Tarea de ejemplo',
-									disable:false
-								}
+								
 							]
 						}
 					}
@@ -45,9 +42,9 @@
 			}
 
 			_cachFilter(event){
-				console.log("app");
+				//console.log("app");
 				this.set('filter',event.detail.name );
-				console.log(event.detail.name);
+				//console.log(event.detail.name);
 			}
 
 			ready(){
@@ -57,10 +54,10 @@
 			}
 
 			_new(event){
-				console.log("nuevo");
-				console.log("nuevo");
+				//console.log("nuevo");
+				//console.log("nuevo");
 				this.push('tareas',{ name: event.detail.name, disable: false});
-				console.log(event.detail);
+				alert("felicidades tienes una nueva tarea guardada");
 			}
 
 		}
